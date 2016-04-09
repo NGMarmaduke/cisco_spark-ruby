@@ -1,5 +1,5 @@
 # CiscoSpark
-Ruby SDK for [MIT License](https://developer.ciscospark.com).
+Ruby SDK for [Cisco Spark](https://developer.ciscospark.com).
 
 Work in progress currently
 
@@ -31,7 +31,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/NGMarmaduke/cisco_spark.
+Bug reports and pull requests are welcome on GitHub at https://github.com/NGMarmaduke/cisco_spark-ruby.
 
 ## License
 
