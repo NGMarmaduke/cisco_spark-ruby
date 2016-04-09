@@ -9,6 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Nick Maher"]
   spec.email         = ["nickpmaher@gmail.com"]
 
+  spec.required_ruby_version = '>= 1.9.2'
+
   spec.summary       = "Ruby client for Cisco Spark: https://developer.ciscospark.com"
   spec.homepage      = "https://github.com/NGMarmaduke/cisco_spark-ruby"
   spec.license       = "MIT"
