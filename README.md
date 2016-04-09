@@ -1,4 +1,7 @@
 # CiscoSpark
+[![Build Status](https://travis-ci.org/NGMarmaduke/cisco_spark-ruby.svg?branch=master)](https://travis-ci.org/NGMarmaduke/cisco_spark-ruby)
+[![Coverage Status](https://coveralls.io/repos/github/NGMarmaduke/cisco_spark-ruby/badge.svg?branch=master)](https://coveralls.io/github/NGMarmaduke/cisco_spark-ruby?branch=master)
+
 Ruby SDK for [Cisco Spark](https://developer.ciscospark.com).
 
 Work in progress currently
