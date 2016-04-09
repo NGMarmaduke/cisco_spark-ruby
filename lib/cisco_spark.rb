@@ -1,6 +1,13 @@
 require "cisco_spark/configuration"
 require "cisco_spark/errors"
+require "cisco_spark/utils"
 require "cisco_spark/version"
+
+require "cisco_spark/models/membership"
+require "cisco_spark/models/message"
+require "cisco_spark/models/person"
+require "cisco_spark/models/room"
+
 
 module CiscoSpark
   extend SingleForwardable

@@ -2,6 +2,13 @@
 
 require "bundler/setup"
 require "cisco_spark"
+require "dotenv"
+Dotenv.load
+
+CiscoSpark.configure do |config|
+  config.debug = true
+  config.api_key = ENV['API_KEY']
+end
 
 require "pry"
 Pry.start
