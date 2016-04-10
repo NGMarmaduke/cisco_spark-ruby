@@ -27,7 +27,7 @@ module CiscoSpark
 
     def send_message(message)
       message.room_id = id
-      message.persit
+      message.persist
     end
 
     def add_person(person, options={})

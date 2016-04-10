@@ -1,4 +1,5 @@
 require "cisco_spark/api"
+require "cisco_spark/collection"
 require "cisco_spark/data_caster"
 
 module CiscoSpark
@@ -25,35 +26,40 @@ module CiscoSpark
         @mutable_attributes = attributes
       end
 
+      def fetch_all_raw(options={})
+        Api.new.get(@resource, options)
+      end
+
       def fetch_all(options={})
-        response = Api.new.get(@resource, options)
-        parse_collection(response['items'])
+        response = fetch_all_raw(options)
+        collection = parse_collection(response.body)
+        CiscoSpark::Collection.new(self, collection, response)
       end
 
       def fetch(id, options={})
         response = Api.new.get("#{@resource}/#{id}", options)
-        parse(response)
+        parse(response.body)
       end
 
       def create(attributes)
         response = Api.new.post(@resource, attributes)
-        parse(response)
+        parse(response.body)
       end
 
       def update(id, attributes)
         attributes = attributes.select{ |name, _v| @mutable_attributes.include?(name) }
         response = Api.new.put("#{@resource}/#{id}", attributes)
-        parse(response)
+        parse(response.body)
       end
 
       def destroy(id)
         Api.new.delete("#{@resource}/#{id}")
       end
 
-      def parse_collection(collection)
-        collection = JSON.parse(collection) if collection.is_a?(String)
-        collection = collection.fetch('items', []) if collection.is_a?(Hash)
-        collection.map{ |hash| parse(hash) }
+      def parse_collection(object)
+        object = JSON.parse(object) if object.is_a?(String)
+        object = object.fetch('items', []) if object.is_a?(Hash)
+        object.map{ |hash| parse(hash) }
       end
 
       def parse(hash)
@@ -71,6 +77,7 @@ module CiscoSpark
 
     def fetch
       merge_attributes(self.class.fetch(id))
+      self
     end
 
     def persist
@@ -91,12 +98,14 @@ module CiscoSpark
 
     def create
       merge_attributes(self.class.create(to_h))
+      self
     end
 
     def update
       attrs = to_h
       id = attrs.delete(:id)
       merge_attributes(self.class.update(id, attrs))
+      self
     end
 
     def merge_attributes(object)

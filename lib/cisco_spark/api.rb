@@ -47,9 +47,7 @@ module CiscoSpark
       response = http_client.request(get_request)
       debug(response) if CiscoSpark.debug
 
-      if response.is_a?(Net::HTTPSuccess)
-        JSON.parse(response.body)
-      end
+      response
     end
 
     def do_post
@@ -60,9 +58,7 @@ module CiscoSpark
       response = http_client.request(post_request)
       debug(response) if CiscoSpark.debug
 
-      if response.is_a?(Net::HTTPSuccess)
-        JSON.parse(response.body)
-      end
+      response
     end
 
     def do_put
@@ -73,9 +69,7 @@ module CiscoSpark
       response = http_client.request(post_request)
       debug(response) if CiscoSpark.debug
 
-      if response.is_a?(Net::HTTPSuccess)
-        JSON.parse(response.body)
-      end
+      response
     end
 
     def http_client
