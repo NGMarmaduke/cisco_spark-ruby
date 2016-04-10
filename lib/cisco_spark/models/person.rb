@@ -24,7 +24,7 @@ module CiscoSpark
     end
 
     def memberships(options={})
-      options[person_id] = id
+      options[:person_id] = id
       CiscoSpark::Membership.fetch_all(options)
     end
   end
