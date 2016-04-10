@@ -22,6 +22,26 @@ Or install it yourself as:
 
 ## Usage
 
+### Configuration
+Configuration can be done in an initializer on app boot. 
+An API key or users OAuth token is required to make any API requests.
+
+API key example:
+```ruby
+CiscoSpark.configure do |config|
+  config.api_key = 'YOUR KEY'
+end
+```
+
+If you are using OAuth token you can wrap API operaions in a block, all API calls within the block will then use that token.
+
+OAuth token example:
+```ruby
+CiscoSpark.with_token('OAuth token') do
+  users_rooms = CiscoSpark::Room.fetch_all
+end
+```
+
 ### Models
 All models have methods to interact with the API and parse response data
 
