@@ -23,8 +23,6 @@ module CiscoSpark
       @resource = resource
       @request_body = request_body
 
-      puts "request_body: #{request_body}"
-
       do_put
     end
 
@@ -75,7 +73,6 @@ module CiscoSpark
       response = http_client.request(post_request)
       debug(response) if CiscoSpark.debug
 
-      puts "response.body: #{response.body}"
       if response.is_a?(Net::HTTPSuccess)
         JSON.parse(response.body)
       end

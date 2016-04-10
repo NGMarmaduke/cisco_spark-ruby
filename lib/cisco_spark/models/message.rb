@@ -24,5 +24,20 @@ module CiscoSpark
     def person_to
       CiscoSpark::Person.fetch(to_person_id)
     end
+
+    def self.all_before_message(messsage, options={})
+      id = message.is_a?(CiscoSpark::Message) ? message.id : message
+      options[:before_message] = id
+      self.fetch_all(options)
+    end
+
+    def self.all_before(date, options={})
+      if date.is_a?(DateTime)
+        date = date.to_time.iso8601
+      end
+
+      options[:before] = date
+      self.fetch_all(before_message: id)
+    end
   end
 end
