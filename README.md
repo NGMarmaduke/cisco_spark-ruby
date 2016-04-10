@@ -43,9 +43,18 @@ end
 ```
 
 ### Models
-All models have methods to interact with the API and parse response data
+All models have methods to interact with the API and parse response data.
 
-###### `klass.fetch_all`
+Inlcuded models:
+- `CiscoSpark::Person`
+- `CiscoSpark::Room`
+- `CiscoSpark::Membership`
+- `CiscoSpark::Message`
+- `CiscoSpark::Webhook`
+
+You can call all the following methods on any of these models
+
+###### `class.fetch_all`
 Fetches all records for a given model, returns a `CiscoSpark::Collection`
 Accepts any parameters that the API allows.
 
@@ -54,7 +63,7 @@ rooms = CiscoSpark::Room.fetch_all(max: 5)
 => #<CiscoSpark::Collection>
 ```
 
-###### `klass.fetch`
+###### `class.fetch`
 Fetches a single record for the given resource ID, returns an instance
 Accepts any parameters that the API allows.
 
@@ -63,7 +72,7 @@ room = CiscoSpark::Room.fetch('Y2lzY...', show_sip_address: true)
 => #<CiscoSpark::Room>
 ```
 
-###### `klass.create`
+###### `class.create`
 Creates a resource with given attribues, returns an instance
 Accepts any parameters that the API allows.
 
@@ -72,7 +81,7 @@ room = CiscoSpark::Room.create(title: 'Ruby Room')
 => #<CiscoSpark::Room>
 ```
 
-###### `klass.update`
+###### `class.update`
 Updates a resource with given attribues, returns an instance
 Accepts any parameters that the API allows.
 
@@ -81,7 +90,7 @@ room = CiscoSpark::Room.update('Y2lzY...', title: 'Groovey Ruby Room')
 => #<CiscoSpark::Room>
 ```
 
-###### `klass.destroy`
+###### `class.destroy`
 Destroys a resource with the given ID, returns an boolean to indicate success
 Accepts any parameters that the API allows.
 
@@ -90,7 +99,7 @@ room = CiscoSpark::Room.destroy('Y2lzY...')
 => true
 ```
 
-###### `klass.parse_collection`
+###### `class.parse_collection`
 Parses a valid JSON string or a ruby hash/array into a collection of models.
 This is useful for processing data recieved from a webhook etc.
 
@@ -100,7 +109,7 @@ rooms = CiscoSpark::Room.parse_collection(json_string)
 => #<CiscoSpark::Collection>
 ```
 
-###### `klass.parse`
+###### `class.parse`
 Parses a valid JSON string or a ruby hash/array into a model.
 This is useful for processing data recieved from a webhook etc.
 
@@ -110,7 +119,7 @@ room = CiscoSpark::Room.parse(json_string)
 => #<CiscoSpark::Room>
 ```
 
-###### `klass.new`
+###### `class.new`
 Creates a new instance of the model with given attributes
 
 ```ruby
