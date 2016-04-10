@@ -15,6 +15,7 @@ module CiscoSpark
       is_monitor: DataCaster::Boolean,
       created: DataCaster::DateTime,
     )
+    mutable_attributes :is_moderator, :is_monitor
 
     def person
       CiscoSpark::Person.fetch(person_id)

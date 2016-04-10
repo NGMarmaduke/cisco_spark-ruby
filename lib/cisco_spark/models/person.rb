@@ -13,5 +13,19 @@ module CiscoSpark
       created: DataCaster::DateTime,
     )
 
+    def self.all_by_email(email, options={})
+      options[:email] = email
+      self.fetch_all(options)
+    end
+
+    def self.all_by_name(name, options={})
+      options[:display_name] = name
+      self.fetch_all(options)
+    end
+
+    def memberships(options={})
+      options[person_id] = id
+      CiscoSpark::Membership.fetch_all(options)
+    end
   end
 end
