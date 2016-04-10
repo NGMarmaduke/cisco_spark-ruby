@@ -24,4 +24,15 @@ module CiscoSpark
   def self.clear_configuration!
     @configuration = Configuration.new
   end
+
+  def self.with_token(token, &block)
+    old_token = configuration.api_key rescue nil
+    configuration.api_key = token
+
+    begin
+      block.call
+    ensure
+      configuration.api_key = old_token
+    end
+  end
 end
