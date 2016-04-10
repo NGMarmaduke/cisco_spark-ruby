@@ -51,10 +51,13 @@ module CiscoSpark
       end
 
       def parse_collection(collection)
+        collection = JSON.parse(collection) if collection.is_a?(String)
+        collection = collection.fetch('items', []) if collection.is_a?(Hash)
         collection.map{ |hash| parse(hash) }
       end
 
       def parse(hash)
+        hash = JSON.parse(hash) if hash.is_a?(String)
         params = attributes.each_with_object({}) do |(attribute, caster), params|
           params[attribute] = caster.call(hash[Utils.camelize(attribute)])
         end
