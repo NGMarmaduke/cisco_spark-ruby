@@ -81,7 +81,7 @@ room = CiscoSpark::Room.update('Y2lzY...', title: 'Groovey Ruby Room')
 => #<CiscoSpark::Room>
 ```
 
-###### `klass.detroy`
+###### `klass.destroy`
 Destroys a resource with the given ID, returns an boolean to indicate success
 Accepts any parameters that the API allows.
 
