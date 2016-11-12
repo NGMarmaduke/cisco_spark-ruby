@@ -11,5 +11,10 @@ module CiscoSpark
       created: DataCaster::DateTime
     )
     mutable_attributes :name
+
+    def memberships(options={})
+      options[:team_id] = id
+      CiscoSpark::TeamMembership.fetch_all(options)
+    end
   end
 end
