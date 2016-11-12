@@ -9,8 +9,6 @@ module CiscoSpark
       parse_pagination(response)
     end
 
-
-
     def method_missing(name, *args, &block)
       if collection.respond_to?(name)
         collection.send(name, *args, &block)

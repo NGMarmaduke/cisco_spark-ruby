@@ -7,6 +7,7 @@ require "cisco_spark/models/membership"
 require "cisco_spark/models/message"
 require "cisco_spark/models/person"
 require "cisco_spark/models/room"
+require "cisco_spark/models/team"
 require "cisco_spark/models/webhook"
 
 
