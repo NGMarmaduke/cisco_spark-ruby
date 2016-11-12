@@ -23,7 +23,7 @@ Or install it yourself as:
 ## Usage
 
 ### Configuration
-Configuration can be done in an initializer on app boot. 
+Configuration can be done in an initializer on app boot.
 An API key or users OAuth token is required to make any API requests.
 
 API key example:
@@ -50,6 +50,8 @@ Inlcuded models:
 - `CiscoSpark::Room`
 - `CiscoSpark::Membership`
 - `CiscoSpark::Message`
+- `CiscoSpark::Team`
+- `CiscoSpark::TeamMembership`
 - `CiscoSpark::Webhook`
 
 You can call all the following methods on any of these models
@@ -168,7 +170,7 @@ room.to_h
 [API reference](https://developer.ciscospark.com/resource-people.html)
 
 ###### `CiscoSpark::Person.all_by_email`
-Search all people by email, 
+Search all people by email,
 
 ```ruby
 people = CiscoSpark::Person.all_by_email('nickpmaher@gmail.com', max: 5)
@@ -241,7 +243,7 @@ room.send_message(message)
 ```
 
 ###### `#add_person`
-Creates a new membership to the room for a given person 
+Creates a new membership to the room for a given person
 
 ```ruby
 person = CiscoSpark::Person.fetch('Y2lz')
@@ -269,6 +271,38 @@ Returns the person that sent this message
 ###### `#person_to`
 Returns the person that the message was sent to
 
+##### `CiscoSpark::Team`
+[API reference](https://developer.ciscospark.com/resource-teams.html)
+
+###### `#memberships`
+Get all memberships for team
+
+```ruby
+team = CiscoSpark::Team.new(id: 'Y3de...')
+team.memberships(max: 5)
+=> #<CiscoSpark::Collection>
+```
+
+###### `#add_person`
+Creates a new membership to the team for a given person
+
+```ruby
+person = CiscoSpark::Person.fetch('Y2lz')
+
+team = CiscoSpark::Team.new(id: 'Y3de...')
+team.add_person(person)
+=> #<CiscoSpark::TeamMembership>
+```
+
+##### `CiscoSpark::TeamMembership`
+[API reference](https://developer.ciscospark.com/resource-team-memberships.html)
+
+###### `#person`
+Returns the person for this membership
+
+###### `#team`
+Returns the team this membership belongs to
+
 ##### `CiscoSpark::Webhook`
 [API reference](https://developer.ciscospark.com/resource-webhooks.html)
 
@@ -290,4 +324,3 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/NGMarm
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
