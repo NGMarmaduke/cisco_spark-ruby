@@ -1,3 +1,6 @@
+require "forwardable"
+require "date"
+
 require "cisco_spark/configuration"
 require "cisco_spark/errors"
 require "cisco_spark/utils"
