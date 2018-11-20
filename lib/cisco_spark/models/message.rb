@@ -11,6 +11,7 @@ module CiscoSpark
       person_email: DataCaster::String,
       room_id: DataCaster::String,
       text: DataCaster::Boolean,
+      markdown: DataCaster::String,
       files: DataCaster::Array,
       to_person_id: DataCaster::String,
       to_person_email: DataCaster::String,
