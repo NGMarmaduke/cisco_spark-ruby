@@ -1,7 +1,7 @@
 module CiscoSpark
   class Configuration
     def self.params
-      [:api_key, :api_version, :api_domain, :api_protocol, :debug]
+      [:api_key, :api_version, :api_domain, :api_protocol, :debug, :proxy]
     end
     attr_accessor *self.params
 
@@ -10,6 +10,7 @@ module CiscoSpark
       @api_domain   = 'api.ciscospark.com'
       @api_protocol = 'https'
       @debug        = false
+      @proxy        = ''
     end
 
     def api_key
