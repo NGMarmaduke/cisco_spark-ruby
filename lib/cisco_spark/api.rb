@@ -73,7 +73,7 @@ module CiscoSpark
     end
 
     def http_client
-      client = Net::HTTP.new(request_uri.host, request_uri.port)
+      client = Net::HTTP.new(request_uri.host, request_uri.port, URI.parse("#{CiscoSpark.proxy}").host, URI.parse("#{CiscoSpark.proxy}").port)
       client.use_ssl = (request_uri.scheme == "https")
       client
     end
