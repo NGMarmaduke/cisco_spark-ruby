@@ -39,6 +39,8 @@ module CiscoSpark
       response = http_client.request(delete_request)
       debug(response) if CiscoSpark.debug
 
+      check_and_raise(response)
+
       response.is_a?(Net::HTTPSuccess)
     end
 
@@ -47,29 +49,41 @@ module CiscoSpark
       response = http_client.request(get_request)
       debug(response) if CiscoSpark.debug
 
+      check_and_raise(response)
+
       response
     end
 
     def do_post
       post_request = request(Net::HTTP::Post)
-      post_request.set_form_data(request_body)
+      post_request.body = request_body.to_json
       debug(post_request) if CiscoSpark.debug
 
       response = http_client.request(post_request)
       debug(response) if CiscoSpark.debug
+
+      check_and_raise(response)
 
       response
     end
 
     def do_put
       post_request = request(Net::HTTP::Put)
-      post_request.set_form_data(request_body)
+      post_request.body = request_body.to_json
       debug(post_request) if CiscoSpark.debug
 
       response = http_client.request(post_request)
       debug(response) if CiscoSpark.debug
 
+      check_and_raise(response)
+
       response
+    end
+
+    def check_and_raise(response)
+      raise InvalidApiKeyError if response.is_a?(Net::HTTPUnauthorized)
+      raise ApiClientError if response.is_a?(Net::HTTPClientError)
+      raise ApiServerError if response.is_a?(Net::HTTPServerError)
     end
 
     def http_client
