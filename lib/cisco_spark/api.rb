@@ -52,7 +52,7 @@ module CiscoSpark
 
     def do_post
       post_request = request(Net::HTTP::Post)
-      post_request.set_form_data(request_body)
+      post_request.body = request_body.to_json
       debug(post_request) if CiscoSpark.debug
 
       response = http_client.request(post_request)
@@ -63,7 +63,7 @@ module CiscoSpark
 
     def do_put
       post_request = request(Net::HTTP::Put)
-      post_request.set_form_data(request_body)
+      post_request.body = request_body.to_json
       debug(post_request) if CiscoSpark.debug
 
       response = http_client.request(post_request)
