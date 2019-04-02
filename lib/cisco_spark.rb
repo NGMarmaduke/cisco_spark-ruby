@@ -37,8 +37,6 @@ module CiscoSpark
 
     begin
       block.call
-    rescue
-      raise
     ensure
       configuration.api_key = old_token
     end

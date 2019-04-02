@@ -73,9 +73,6 @@ describe CiscoSpark do
 
       it 'raises an InvalidApiKeyError' do
         http_mock
-        CiscoSpark.configure do |config|
-          config.debug = true
-        end
 
         expect do
           CiscoSpark.with_token(api_key) do
@@ -92,10 +89,6 @@ describe CiscoSpark do
       it 'raises an ApiClientError' do
         http_mock
 
-        CiscoSpark.configure do |config|
-          config.debug = true
-        end
-
         expect do
           CiscoSpark.with_token(api_key) do
             CiscoSpark::Webhook.fetch_all
@@ -110,10 +103,6 @@ describe CiscoSpark do
 
       it 'raises an ApiServerError' do
         http_mock
-
-        CiscoSpark.configure do |config|
-          config.debug = true
-        end
 
         expect do
           CiscoSpark.with_token(api_key) do
