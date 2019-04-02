@@ -58,4 +58,69 @@ describe CiscoSpark do
       end
     end
   end
+
+  context 'api access' do
+    let(:http_mock) do
+      mock = double('HTTP mock')
+      allow(mock).to receive(:use_ssl=).and_return(true)
+      allow(mock).to receive(:request).and_return(exception)
+      allow(Net::HTTP).to receive(:new).and_return(mock)
+    end
+
+    context 'invalid token' do
+      let(:api_key) { 'invalid' }
+      let(:exception) { Net::HTTPUnauthorized.new('body', 401, 'Unauthorized') }
+
+      it 'raises an InvalidApiKeyError' do
+        http_mock
+        CiscoSpark.configure do |config|
+          config.debug = true
+        end
+
+        expect do
+          CiscoSpark.with_token(api_key) do
+            CiscoSpark::Webhook.fetch_all
+          end
+        end.to raise_error(CiscoSpark::InvalidApiKeyError)
+      end
+    end
+
+    context 'client error' do
+      let(:api_key) { SecureRandom.hex }
+      let(:exception) { Net::HTTPBadRequest.new('body', 400, 'BadRequest') }
+
+      it 'raises an ApiClientError' do
+        http_mock
+
+        CiscoSpark.configure do |config|
+          config.debug = true
+        end
+
+        expect do
+          CiscoSpark.with_token(api_key) do
+            CiscoSpark::Webhook.fetch_all
+          end
+        end.to raise_error(CiscoSpark::ApiClientError)
+      end
+    end
+
+    context 'server error' do
+      let(:api_key) { SecureRandom.hex }
+      let(:exception) { Net::HTTPGatewayTimeOut.new('body', 504, 'GatewayTimeout') }
+
+      it 'raises an ApiServerError' do
+        http_mock
+
+        CiscoSpark.configure do |config|
+          config.debug = true
+        end
+
+        expect do
+          CiscoSpark.with_token(api_key) do
+            CiscoSpark::Webhook.fetch_all
+          end
+        end.to raise_error(CiscoSpark::ApiServerError)
+      end
+    end
+  end
 end
