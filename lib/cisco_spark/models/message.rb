@@ -25,5 +25,18 @@ module CiscoSpark
     def person_to
       CiscoSpark::Person.fetch(to_person_id)
     end
+
+    def file_content
+      return unless files
+
+      response = Api.new.get(files.first.split('/')[-2..-1].join('/'))
+      response.header['content-disposition'][/filename="(.+)"/]
+
+      {
+        data: "data:application/octet-stream;base64,#{Base64.encode64(response.body)}",
+        filename: Regexp.last_match(1)
+      }
+    end
+
   end
 end
