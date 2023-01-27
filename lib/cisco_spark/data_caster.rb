@@ -3,4 +3,5 @@ module DataCaster
   Boolean = lambda { |data| data }
   String = lambda { |data| data.to_s }
   DateTime = lambda { |data| data ? ::DateTime.parse(data) : nil }
+  Hash = lambda { |data| data ? data : nil }
 end
