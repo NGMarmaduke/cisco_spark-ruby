@@ -8,6 +8,8 @@ module CiscoSpark
     attributes(
       id: DataCaster::String,
       title: DataCaster::String,
+      type: DataCaster::String,
+      owner_id: DataCaster::String,
       created: DataCaster::DateTime,
       last_activity: DataCaster::DateTime,
       is_locked: DataCaster::Boolean,
